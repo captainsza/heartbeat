@@ -1,6 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import imageio
+import os
+import pyautogui
+import time
+
 
 def heart_function(t, stretch_factor, bend_factor):
     x = stretch_factor * (16 * np.sin(t)**3)
@@ -57,3 +61,15 @@ if __name__ == "__main__":
     factors = np.vstack((stretch_factor, bend_factor)).T
 
     generate_heart_animation("love.gif", len(factors), factors[:, 0], factors[:, 1])
+
+def open_gif_in_fullscreen(filename):
+    if os.name == 'nt':  # Check if the operating system is Windows
+        os.startfile(filename, 'open')
+        time.sleep(1)  # Wait for the file to open
+        pyautogui.press('f11')  # Simulate pressing the F11 key
+    else:
+        # Add code here to open the GIF in full screen for other operating systems
+        pass
+
+# After saving the GIF
+open_gif_in_fullscreen("love.gif")
